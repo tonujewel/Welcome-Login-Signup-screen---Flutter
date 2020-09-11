@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_sign_up/Utils/Constants.dart';
 
-class TextFieldContainer extends StatelessWidget {
+class TextFieldContainer extends StatefulWidget {
   final Widget child;
   final String hintText;
   final ValueChanged<String> onChange;
@@ -13,6 +13,11 @@ class TextFieldContainer extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _TextFieldContainerState createState() => _TextFieldContainerState();
+}
+
+class _TextFieldContainerState extends State<TextFieldContainer> {
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
@@ -23,7 +28,7 @@ class TextFieldContainer extends StatelessWidget {
         color: PrimaryLightColor,
         borderRadius: BorderRadius.circular(29),
       ),
-      child: child,
+      child: widget.child,
     );
   }
 }
