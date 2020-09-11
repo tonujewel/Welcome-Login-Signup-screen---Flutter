@@ -70,7 +70,7 @@ class _LoginBodyState extends State<LoginBody> {
                     Toast.show("Please Enter password", context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   } else {
-                    shoWLoadingDialog(context);
+                    showLoadingDialog(context);
                     doLogin(context,userName,password);
                   }
                 },
@@ -98,8 +98,7 @@ class _LoginBodyState extends State<LoginBody> {
       'password': password
     };
 
-    Map<String, dynamic> response = await ApiClient.Request(context,
-        url: url, body: body, method: Method.POST);
+    Map<String, dynamic> response = await ApiClient.Request(context, url: url, body: body, method: Method.POST);
     try {
       if (response.containsKey("message")) {
         Navigator.of(context).pop();
@@ -109,20 +108,18 @@ class _LoginBodyState extends State<LoginBody> {
         user.username = userName;
         user.password = password;
 
-        SharedPreferences pref;
+        SharedPreferences pref = await SharedPreferences.getInstance();
         pref.setString('user', json.encode(user.toString()));
-
         Toast.show("login success", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-
         Navigator.of(context).pop();
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return HomePage();
         }));
       }else{
-
+        Toast.show("Something went wrong", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       }
     } catch (e) {
-
+      Toast.show("Something went wrong", context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
   }
 }

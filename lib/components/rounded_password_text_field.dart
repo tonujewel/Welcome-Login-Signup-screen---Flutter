@@ -14,36 +14,33 @@ class RoundedPasswordTextField extends StatefulWidget {
 }
 
 class _RoundedPasswordTextFieldState extends State<RoundedPasswordTextField> {
+  bool _showPassword = true;
+
+
   @override
   Widget build(BuildContext context) {
-
-    bool _showPassword = false;
-    void _togglevisibility() {
-      setState(() {
-        _showPassword = !_showPassword;
-      });
-    }
-
     return TextFieldContainer(
       child: TextField(
         onChanged: widget.onChanged,
-        obscureText: !_showPassword,
+        obscureText: _showPassword,
+        keyboardType: TextInputType.visiblePassword,
         decoration: InputDecoration(
           hintText: "Password",
           border: InputBorder.none,
           icon: Icon(
               Icons.lock,color: primaryColor
           ),
-          suffixIcon: GestureDetector(
-            onTap: (){
-              _togglevisibility();
+          suffixIcon: IconButton(
+            onPressed: (){
+              _showPassword = !_showPassword;
+              print(_showPassword);
+              setState(() {
+              });
             },
-            child: Icon(_showPassword ? Icons.visibility : Icons.visibility_off, color: primaryColor,),
+            icon: Icon(!_showPassword ? Icons.visibility : Icons.visibility_off, color: primaryColor,),
           ),
         ),
       ),
     );
   }
 }
-
-

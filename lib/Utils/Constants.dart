@@ -4,7 +4,7 @@ const primaryColor = Color(0xFF6F35A5);
 const PrimaryLightColor = Color(0xFFF1E6FF);
 const bottomNavColor = Color(0xFF6F35A5);
 
- void shoWLoadingDialog(BuildContext context){
+ void showLoadingDialog(BuildContext context){
   showDialog(
       context: context,
       child: SizedBox(
@@ -22,7 +22,9 @@ const bottomNavColor = Color(0xFF6F35A5);
                       color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          backgroundColor: primaryColor,
+                        ),
                       ),
                       shape: CircleBorder(),
                       clipBehavior: Clip.antiAlias,
