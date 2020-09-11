@@ -52,7 +52,6 @@ class _LoginBodyState extends State<LoginBody> {
                   onChanged: (value) {
                     userName = value;
                   }),
-
               RoundedPasswordTextField(
                 onChanged: (value) {
                   password = value;
