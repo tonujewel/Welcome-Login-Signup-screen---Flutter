@@ -1,5 +1,9 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:login_sign_up/Screens/aboutus/about_us.dart';
+import 'package:login_sign_up/Screens/bartender/bartender.dart';
+import 'package:login_sign_up/Screens/hunt/hunt.dart';
+import 'package:login_sign_up/Screens/review/hunt.dart';
 import 'package:login_sign_up/Utils/Constants.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,20 +12,54 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentIndex = 0;
+  int bottomSelectedIndex = 0;
+
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+
+  void bottomTapped(int index) {
+    setState(() {
+      bottomSelectedIndex = index;
+      pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Last Orbitals'),
       ),
-      body: Center(child: Text('Welcome to Last Orbital')),
+      body: SizedBox.expand(
+          child: PageView(
+            controller: pageController,
+            onPageChanged: (index) {
+              setState(() => bottomSelectedIndex  = index);
+            },
+            children: <Widget>[
+              AboutUs(),
+              Hunt(),
+              Review(),
+              Bartender(),
+            ],
+          )
+      ),
       bottomNavigationBar: BottomNavyBar(
-        selectedIndex: currentIndex,
+        selectedIndex: bottomSelectedIndex,
         showElevation: true,
         curve: Curves.easeInOutCubic,
         onItemSelected: (index) => setState(() {
-          currentIndex = index;
+          bottomTapped(index);
         }),
         items: [
           BottomNavyBarItem(
