@@ -32,6 +32,8 @@ dependencies:
   bottom_navy_bar: ^5.5.0
 # Share preference
   shared_preferences: ^0.5.7+3
+# URL launcher
+  url_launcher: ^5.5.0
 
 
   # The following adds the Cupertino Icons font to your application.
